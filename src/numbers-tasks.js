@@ -69,7 +69,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  return Math.sqrt(Math.abs(x1 - x2) ** 2 + Math.abs(y1 - y2) ** 2);
+  return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
 }
 
 /**
@@ -105,8 +105,8 @@ function getLinearEquationRoot(a, b) {
  *   (0,-1) (1,0)    => π/2
  *   (0,1) (0,1)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  return Math.abs(Math.atan2(y1, x1) - Math.atan2(y2, x2));
 }
 
 /**
@@ -256,10 +256,15 @@ function getCube(num) {
 function getFibonacciNumber(index) {
   const fibos = [0, 1, 1];
   if (fibos[index] === undefined) {
-    for (let i = 3; i <= index; i += 1) {
-      fibos[i] = fibos[i - 1] + fibos[i - 2];
-    }
+    fibos[index] =
+      getFibonacciNumber(index - 1) + getFibonacciNumber(index - 2);
   }
+  // const fibos = [0, 1, 1];
+  // if (fibos[index] === undefined) {
+  //   for (let i = 3; i <= index; i += 1) {
+  //     fibos[i] = fibos[i - 1] + fibos[i - 2];
+  //   }
+  // }
   return fibos[index];
 }
 
@@ -557,9 +562,8 @@ function getIntegerPartNumber(number) {
  * 1, 2, 3       => 6
  * 0.1, 0.2, 0.3 => 0.6
  */
-function getSumOfNumbers(/* x1, x2, x3 */) {
-  throw new Error('Not implemented');
-  // return x1 + x2 + x3;
+function getSumOfNumbers(x1, x2, x3) {
+  return (x1 + x2 + x3).toFixed(5);
 }
 
 /**
@@ -604,8 +608,12 @@ function getRandomInteger(min, max) {
  * @example:
  * 3, 4 => 5
  */
-function getHypotenuse(/* a, b */) {
-  throw new Error('Not implemented');
+function getHypotenuse(a, b) {
+  return Math.hypot(a, b);
+  // const max = Math.max(Math.abs(a), Math.abs(b));
+  // const min = Math.min(Math.abs(a), Math.abs(b));
+  // const r = min / max;
+  // return max * Math.sqrt(1 + r * r);
 }
 
 /**
@@ -623,6 +631,9 @@ function getHypotenuse(/* a, b */) {
  */
 function getCountOfOddNumbers(number) {
   return Math.ceil(Math.abs(number) / 2);
+  //
+  // variant 2
+  //
   // let count = 0;
   // for (let i = 1; i <= Math.abs(number); i += 1) {
   //   if (i % 2 !== 0) {
